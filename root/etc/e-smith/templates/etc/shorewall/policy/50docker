@@ -1,0 +1,7 @@
+#
+# 50docker 
+#
+dock fw ACCEPT
+fw dock ACCEPT
+
+

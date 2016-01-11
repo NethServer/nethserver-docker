@@ -1,0 +1,10 @@
+#!/bin/bash
+
+docker events | while read L; do
+
+  if [[ "$L" =~ \ (start|stop)$ ]]; then
+      echo $L | cut -d ' ' -f 2-
+      /sbin/e-smith/signal-event docker-fw-adjust
+  fi 
+
+done 

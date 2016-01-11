@@ -1,0 +1,5 @@
+#
+# 10base
+#
+DOCKER_NETWORK_OPTIONS='--iptables=false --userland-proxy=false'
+

@@ -1,0 +1,9 @@
+[Unit]
+Description=NethServer Docker events listener
+Documentation=http://github.com/DavidePrincipi/nethserver-docker
+Requires=docker.service
+After=docker.service
+
+[Service]
+ExecStart=/usr/libexec/dckfwatch 
+

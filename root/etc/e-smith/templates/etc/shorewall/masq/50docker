@@ -1,0 +1,13 @@
+#
+# 50docker
+#
+{
+    use esmith::util;
+    use esmith::NetworksDB;
+    my $ndb = esmith::NetworksDB->open_ro();
+    foreach ($ndb->get_by_role('green')) {
+             $OUT .= $_->key." 172.17.0.0/16\n";
+    }
+}
+
+
