@@ -1,8 +1,5 @@
-{
     "ipv6": false,
     "iptables": false,
     "ip-forward": false,
     "ip-masq": false,
     "userland-proxy": false,
-    "bridge": "none"
-}

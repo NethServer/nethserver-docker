@@ -1,0 +1,18 @@
+#
+# 50docker -- masquerade the green networks with a configured gateway 
+#             if red interface does not exist
+#
+{
+    use esmith::NetworksDB;
+    my $ndb = esmith::NetworksDB->open_ro();
+    
+    $OUT = '';
+    if( ! $ndb->red) {
+        foreach ($ndb->green) {
+            if($_->prop('gateway')) {
+                $OUT .= "MASQUERADE - " . $_->key . "\n";
+            }
+        }
+    }
+}
+

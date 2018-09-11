@@ -1,0 +1,7 @@
+#
+# 65aqua -- Rules for Docker containers
+#
+
+?COMMENT aqua
+ACCEPT	aqua	$FW	tcp	3306
+

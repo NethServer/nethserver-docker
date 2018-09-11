@@ -1,5 +1,5 @@
 #
 # 50aqua -- custom docker network zone
 #
--      aqua0    optional
+aqua      aqua+     optional
 
