@@ -1,23 +1,17 @@
-Name: nethserver-docker
+Name:           nethserver-docker
 Version: 0.0.0
 Release: 1%{?dist}
-Summary: NethServer Docker integration
-Source: %{name}-%{version}.tar.gz
-BuildArch: noarch
+Summary:        NethServer Docker configuration
+
+License:        GPLv3+
 URL: %{url_prefix}/%{name}
-License: GPL
-
-BuildRequires: nethserver-devtools
-BuildRequires: systemd
-Requires(post): systemd
-Requires(preun): systemd
-Requires(postun): systemd
-
-Requires: docker
-Requires: nethserver-base
+Source0:        %{name}-%{version}.tar.gz
+BuildArch:      noarch
+BuildRequires:  nethserver-devtools
+Requires:       docker-ce
 
 %description
-Install and configure Docker on NethServer
+NethServer configuration for Docker CE
 
 %prep
 %setup
@@ -26,28 +20,20 @@ Install and configure Docker on NethServer
 %{makedocs}
 perl createlinks
 
+
 %install
-rm -rf %{buildroot}
 (cd root   ; find . -depth -print | cpio -dump %{buildroot})
 %{genfilelist} %{buildroot} > %{name}-%{version}-filelist
+mkdir -p %{buildroot}%{_nsstatedir}/portainer
+
 
 %files -f %{name}-%{version}-filelist
-%defattr(-,root,root)
 %doc COPYING
+%doc README.rst
+%config(noreplace) %attr (0644,root,root) %{_sysconfdir}/docker/docker.conf
 %dir %{_nseventsdir}/%{name}-update
-
-%post
-%systemd_post dckfwatch.service
-
-%preun
-%systemd_preun dckfwatch.service
-
-%postun
-%systemd_postun
-
+%dir %{_nsstatedir}/portainer
 
 %changelog
-* Mon Jan 11 2016 Davide Principi <davide.principi@nethesis.it> - 0.0.0-1
+* Mon Sep 10 2018 Davide Principi <davide.principi@nethesis.it> - 0.0.0
 - Initial version
-
-

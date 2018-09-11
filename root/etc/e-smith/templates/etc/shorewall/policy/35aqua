@@ -1,0 +1,7 @@
+#
+# 35aqua -- the Docker network policy
+#
+aqua net ACCEPT 
+$FW aqua ACCEPT
+aqua $FW REJECT info
+loc aqua REJECT info

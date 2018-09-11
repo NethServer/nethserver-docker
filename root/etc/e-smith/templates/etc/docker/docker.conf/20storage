@@ -1,0 +1,16 @@
+{
+    #
+    # 20storage
+    #
+    
+    $OUT = '';
+    
+    if($docker{'DirectLvmDevice'}) {
+        $OUT = <<'EOF';
+    "storage-driver": "devicemapper",
+    "storage-opts": [
+        "dm.directlvm_device=/dev/sdb"
+    ],
+EOF
+    }
+}

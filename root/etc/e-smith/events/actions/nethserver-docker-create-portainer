@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/bin/bash
 
 #
 # Copyright (C) 2018 Nethesis S.r.l.
@@ -20,22 +20,33 @@
 # along with NethServer.  If not, see COPYING.
 #
 
-use strict;
-use esmith::Build::CreateLinks  qw(:all);
-
 #
-# event nethserver-docker-update event
+# Create the Portainer container instance
 #
-event_templates('nethserver-docker-update', qw(
-    /etc/docker/docker.conf
-));
-event_actions('nethserver-docker-update', qw(
-    initialize-default-databases   00
-    nethserver-docker-create-network 20
-    nethserver-docker-create-portainer 20
-));
-event_services('nethserver-docker-update', qw(
-    docker restart
-    httpd-admin reload
-));
 
+status=$(/sbin/e-smith/config getprop docker status)
+IpAddress=172.28.0.2
+
+if [[ ${status} != enabled ]]; then
+    exit 0
+fi
+
+HasPortainer=$(docker ps -f name=portainer -q -a)
+
+if [[ $? != 0 ]]; then
+    exit 1
+fi
+
+if [[ -n ${HasPortainer} ]]; then
+    exit 0
+fi
+
+docker run --detach \
+    --restart always \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v /var/lib/nethserver/portainer:/data \
+    --name portainer \
+    --hostname portainer \
+    --network aqua \
+    --ip ${IpAddress} \
+    portainer/portainer
