@@ -57,3 +57,9 @@ Access the Portainer user interface at ::
 The first time it is accessed, it asks to generate the administrative
 credentials.
 
+Docker repository
+-----------------
+
+The official repository of docker could be enabled to test the lastest version ::
+
+    yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
