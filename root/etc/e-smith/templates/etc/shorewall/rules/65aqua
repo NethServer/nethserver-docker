@@ -1,4 +1,11 @@
 #
+# 65aqua Accept ping from aqua
+#
+
+Ping/ACCEPT    aqua            $FW
+
+
+#
 # 65aqua -- Rules for Docker containers
 #
 
