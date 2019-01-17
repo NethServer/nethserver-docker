@@ -25,7 +25,7 @@
 #
 
 status=$(/sbin/e-smith/config getprop docker status)
-IpAddress=172.28.0.2
+IpAddress=172.28.255.254
 
 if [[ ${status} != enabled ]]; then
     exit 0
