@@ -25,9 +25,14 @@
 #
 
 status=$(/sbin/e-smith/config getprop docker status)
+portainer=$(/sbin/e-smith/config getprop portainer status)
 IpAddress=172.28.255.254
 
 if [[ ${status} != enabled ]]; then
+    exit 0
+fi
+
+if [[ ${portainer} != enabled ]]; then
     exit 0
 fi
 
