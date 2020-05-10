@@ -63,3 +63,22 @@ Docker repository
 The official repository of docker could be enabled to test the lastest version ::
 
     yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+    
+
+Open Firewall For testing purpose
+---------------------------------
+
+For testing purposes you can open the docker network by policy. In a production environment you should leave this step and set firewall rules ::
+
+  mkdir -p /etc/e-smith/templates-custom/etc/shorewall/policy
+  cp /etc/e-smith/templates/etc/shorewall/policy/35aqua /etc/e-smith/templates-custom/etc/shorewall/policy/
+  cat << 'EOF' > /etc/e-smith/templates-custom/etc/shorewall/policy/35aqua
+  #
+  # 35aqua -- the Docker network policy
+  #
+  aqua net ACCEPT
+  $FW aqua ACCEPT
+  aqua $FW ACCEPT
+  loc aqua ACCEPT
+  EOF
+  signal-event firewall-adjust
