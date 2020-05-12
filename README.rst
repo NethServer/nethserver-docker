@@ -49,6 +49,10 @@ Enable the ``docker`` service and start it for the first time ::
 
 Web user interface
 ------------------
+Portainer is an interface to manage all containers running on this host or eventually on remote hosts, a property must be enabled before to create the portainer container::
+
+    config setprop portainer status enabled
+    signal-event nethserver-docker-update
 
 Access the Portainer user interface at ::
 
