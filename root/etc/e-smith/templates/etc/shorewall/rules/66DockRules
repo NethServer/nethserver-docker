@@ -1,0 +1,22 @@
+{
+    use esmith::ConfigDB;
+    my $dock = esmith::ConfigDB->open_ro('/var/lib/nethserver/db/dockrules')
+                        || esmith::ConfigDB->create('/var/lib/nethserver/db/dockrules');
+
+    foreach my $rule ($dock->get_all_by_prop('status' => 'enabled')) {
+        my $name      = $rule->key;
+        my $network   =   $rule->prop('type') || '';
+        my $tcpPorts  = $rule->prop(TCPPorts) || $rule->prop(TCPPort) || '';
+        my $udpPorts  = $rule->prop(UDPPorts) || $rule->prop(UDPPort) || '';
+
+        if($tcpPorts || $udpPorts) {
+            $OUT .= "# Rule for docker $name\n";
+            foreach my $port (split(',', $tcpPorts)) {
+                $OUT .= "ACCEPT\t$network\t\$FW\ttcp\t$port\n";
+            }
+            foreach my $port (split(',', $udpPorts)) {
+                $OUT .= "ACCEPT\t$network\t\$FW\tudp\t$port\n";
+            }
+        }
+    }
+}
