@@ -11,7 +11,12 @@ NethServer.
   the usual ``Firewall rules`` and ``Port forwarding`` pages
 
 * As example to test integration with system services, connections from the
-  ``aqua`` zone are allowed to the MySQL/MariaDB port 3306
+  ``aqua`` zone are allowed to the MySQL/MariaDB port 3306.
+
+More port rules can be opened to the system services with a esmith db command::
+
+  db dockrules set customName aqua TCPPorts 12,23,56,89 UDPPorts 120,230,560,890 status enabled
+  signal-event firewall-adjust
 
 * It exposes portainer dashboards through the
   ``httpd-admin`` Apache instance as ``https://<IP>:980/portainer/``
