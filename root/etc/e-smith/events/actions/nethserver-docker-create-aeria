@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/bin/bash
 
 #
 # Copyright (C) 2020 Nethesis S.r.l.
@@ -20,31 +20,26 @@
 # along with NethServer.  If not, see COPYING.
 #
 
-use strict;
-use esmith::Build::CreateLinks  qw(:all);
+#
+# Check if aeria network does not exist and the bridge is set, install the net-dhcp plugin and create the docker aeria network
+#
 
-#
-# event nethserver-docker-update event
-#
-event_templates('nethserver-docker-update', qw(
-    /etc/docker/docker.conf
-    /etc/nethserver/eorepo.conf
-));
-event_actions('nethserver-docker-update', qw(
-    initialize-default-databases   00
-    nethserver-docker-create-network 20
-    nethserver-docker-create-portainer 20
-    nethserver-docker-create-aeria 20
-));
-event_services('nethserver-docker-update', qw(
-    docker restart
-    httpd-admin reload
-));
+bridgeAeria=$(/sbin/e-smith/config getprop docker bridgeAeria)
 
-#
-# event nethserver-docker-plugin-update event
-#
-event_actions('nethserver-docker-plugin-update', qw(
-    initialize-default-databases   00
-    nethserver-docker-upgrade-plugin 20
-));
+if [[ -z ${bridgeAeria} ]]; then
+    exit 0
+fi
+
+HasNetwork=$(docker network ls -f name=aeria -q)
+if [[ $? != 0 ]]; then
+    exit 1
+fi
+
+docker plugin install --grant-all-permissions devplayer0/net-dhcp
+
+if [[ -n ${HasNetwork} ]]; then
+    exit 0
+fi
+
+echo "[NOTICE] Creating the aeria Docker network..."
+docker network create -d devplayer0/net-dhcp:latest --ipam-driver null -o bridge=${bridgeAeria} aeria
