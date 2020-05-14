@@ -64,7 +64,7 @@ credentials.
 Docker repository
 -----------------
 
-The official repository of docker could be enabled to test the lastest version ::
+The official repository of docker could be enabled to test the latest version ::
 
     yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
     
@@ -86,3 +86,25 @@ For testing purposes you can open the docker network by policy. In a production 
   loc aqua ACCEPT
   EOF
   signal-event firewall-adjust
+
+Aeria network
+-------------
+
+NethServer docker provides a docker network named Aeria that is bound to a bridge.
+For bridge creation the server manager could be used.
+
+To enable the Aeria network the bridgeAeria db prop has to be set to the name of the bridge ::
+
+  config setprop docker bridgeAeria br0
+  signal-event nethserver-docker-update
+
+The NethServer DHCP module can be used to set IP addresses for the docker containers.
+By default docker containers use random MAC addresses so fixed ones need to be set for the containers to make DHCP reservations work.
+
+Here is an example for starting pihole in the Aeria network and set the MAC address ::
+
+  docker run -d --name pihole --net=aeria --mac-address=01:02:03:04:05:06 pihole/pihole:latest
+
+Aeria uses a docker plugin. To update the plugin ::
+
+  signal-event nethserver-docker-plugin-update

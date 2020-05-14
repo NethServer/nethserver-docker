@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 #
-# Copyright (C) 2018 Nethesis S.r.l.
+# Copyright (C) 2020 Nethesis S.r.l.
 # http://www.nethesis.it - nethserver@nethesis.it
 #
 # This script is part of NethServer.
@@ -33,9 +33,17 @@ event_actions('nethserver-docker-update', qw(
     initialize-default-databases   00
     nethserver-docker-create-network 20
     nethserver-docker-create-portainer 20
+    nethserver-docker-create-aeria 20
 ));
 event_services('nethserver-docker-update', qw(
     docker restart
     httpd-admin reload
 ));
 
+#
+# event nethserver-docker-plugin-update event
+#
+event_actions('nethserver-docker-plugin-update', qw(
+    initialize-default-databases   00
+    nethserver-docker-upgrade-plugin 20
+));
