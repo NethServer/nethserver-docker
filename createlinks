@@ -28,6 +28,7 @@ use esmith::Build::CreateLinks  qw(:all);
 #
 event_templates('nethserver-docker-update', qw(
     /etc/docker/docker.conf
+    /etc/nethserver/eorepo.conf
 ));
 event_actions('nethserver-docker-update', qw(
     initialize-default-databases   00
