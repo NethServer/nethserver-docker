@@ -1,5 +1,5 @@
 Name:           nethserver-docker
-Version: 0.0.0
+Version: 1.0.0
 Release: 1%{?dist}
 Summary:        NethServer Docker configuration
 
