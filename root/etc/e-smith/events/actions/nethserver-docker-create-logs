@@ -1,7 +1,7 @@
-#!/usr/bin/perl
+#!/bin/bash
 
 #
-# Copyright (C) 2018 Nethesis S.r.l.
+# Copyright (C) 2020 Nethesis S.r.l.
 # http://www.nethesis.it - nethserver@nethesis.it
 #
 # This script is part of NethServer.
@@ -20,23 +20,8 @@
 # along with NethServer.  If not, see COPYING.
 #
 
-use strict;
-use esmith::Build::CreateLinks  qw(:all);
+if [[ -f '/var/log/docker/docker.conf' ]]; then
+    exit 0
+fi
 
-#
-# event nethserver-docker-update event
-#
-event_templates('nethserver-docker-update', qw(
-    /etc/docker/docker.conf
-    /etc/nethserver/eorepo.conf
-));
-event_actions('nethserver-docker-update', qw(
-    initialize-default-databases   00
-    nethserver-docker-create-logs  10
-    nethserver-docker-create-network 20
-    nethserver-docker-create-portainer 20
-));
-event_services('nethserver-docker-update', qw(
-    docker restart
-    httpd-admin reload
-));
+/usr/bin/systemctl restart rsyslog
