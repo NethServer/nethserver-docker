@@ -1,0 +1,6 @@
+/var/log/docker/docker.log {
+  missingok
+  notifempty
+  delaycompress
+  copytruncate
+}

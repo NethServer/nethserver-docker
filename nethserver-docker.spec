@@ -25,12 +25,14 @@ perl createlinks
 (cd root   ; find . -depth -print | cpio -dump %{buildroot})
 %{genfilelist} %{buildroot} > %{name}-%{version}-filelist
 mkdir -p %{buildroot}%{_nsstatedir}/portainer
+mkdir -p ${RPM_BUILD_ROOT}/var/log/docker
 
 
 %files -f %{name}-%{version}-filelist
 %doc COPYING
 %doc README.rst
 %config(noreplace) %attr (0644,root,root) %{_sysconfdir}/docker/docker.conf
+%attr(0750,root,root) %dir /var/log/docker
 %dir %{_nseventsdir}/%{name}-update
 %dir %{_nsstatedir}/portainer
 
