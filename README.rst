@@ -108,7 +108,7 @@ By default docker containers use random MAC addresses so fixed ones need to be s
 
 Here is an example for starting pihole in the Aeria network and set the MAC address ::
 
-  docker run -d --name pihole --net=aeria --mac-address=01:02:03:04:05:06 pihole/pihole:latest
+  docker run -d --name pihole -e TZ="Europe/Vienna" -e WEBPASSWORD="admin" -v "$(pwd)/etc-pihole/:/etc/pihole/" -v "$(pwd)/etc-dnsmasq.d/:/etc/dnsmasq.d/" --cap-add NET_ADMIN --net=aeria --mac-address=0e:6f:47:f7:26:1a --restart=unless-stopped pihole/pihole:latest
 
 Aeria uses a docker plugin. To update the plugin ::
 
