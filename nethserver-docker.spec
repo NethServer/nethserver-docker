@@ -37,5 +37,9 @@ mkdir -p ${RPM_BUILD_ROOT}/var/log/docker
 %dir %{_nsstatedir}/portainer
 
 %changelog
+* Fri May 15 2020 Stephane de Labrusse <stephdl@de-labrusse.fr> - 1.0.0-1
+- First stable release to NethForge
+- Code from mrmarkuz & stephdl
+
 * Mon Sep 10 2018 Davide Principi <davide.principi@nethesis.it> - 0.0.0
 - Initial version
