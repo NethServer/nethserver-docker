@@ -6,7 +6,7 @@
 
   # test if containers are running, exit if false
   my $output = `docker ps  --format='{{ .Names }}'`;
-  exit 0 if ($output eq '');
+  return "\n# No running containers\n" if ($output eq '');
 
    open(PH, '-|', "docker inspect --format='{{json .}}' `docker ps  --format='{{ .Names }}'`");
 
