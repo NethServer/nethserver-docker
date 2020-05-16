@@ -37,6 +37,10 @@ mkdir -p ${RPM_BUILD_ROOT}/var/log/docker
 %dir %{_nsstatedir}/portainer
 
 %changelog
+* Sat May 16 2020 Stephane de Labrusse <stephdl@de-labrusse.fr> 1.0.1-1 
+  - Merge pull request #11 from stephdl/fixRuletemplate
+  - Rule template must output a comment
+
 * Fri May 15 2020 Stephane de Labrusse <stephdl@de-labrusse.fr> - 1.0.0-1
 - First stable release to NethForge
 - Code from mrmarkuz & stephdl
