@@ -1,0 +1,7 @@
+
+#
+# accept mac macvlan network from localhost
+#
+
+$FW mac ACCEPT
+mac $FW ACCEPT
