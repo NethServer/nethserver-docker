@@ -36,6 +36,7 @@ event_actions('nethserver-docker-update', qw(
     nethserver-docker-create-network 20
     nethserver-docker-create-portainer 20
     nethserver-docker-create-aeria 20
+    nethserver-docker-macvlan-creation 20
 ));
 event_services('nethserver-docker-update', qw(
     docker restart
