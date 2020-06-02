@@ -1,0 +1,19 @@
+#!/bin/bash
+
+macVlanNetwork=$(/usr/sbin/e-smith/db configuration getprop docker macVlanNetwork)
+macVlanNic=$(/usr/sbin/e-smith/db configuration getprop docker macVlanNic)
+
+if [[ -z $macVlanNetwork ]]; then
+    exit 0
+fi
+
+if [[ -z $macVlanNic ]]; then
+    exit 0
+fi
+
+#
+# Create macvlan0
+#
+/usr/sbin/ip link add macvlan0 link $macVlanNic type macvlan mode bridge
+/usr/sbin/ip addr add $macVlanNetwork dev macvlan0
+/usr/sbin/ip link set macvlan0 up

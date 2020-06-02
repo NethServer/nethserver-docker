@@ -1,26 +1,9 @@
 #!/bin/bash
 
-macVlanNetwork=$(/usr/sbin/e-smith/db configuration getprop docker macVlanNetwork)
 macVlanNic=$(/usr/sbin/e-smith/db configuration getprop docker macVlanNic)
 macVlanGateway=$(/usr/sbin/e-smith/db configuration getprop docker macVlanGateway)
 macVlanLocalNetwork=$(/usr/sbin/e-smith/db configuration getprop docker macVlanLocalNetwork)
 
-if [[ -z $macVlanNetwork ]]; then
-    exit 0
-fi
-
-if [[ -z $macVlanNic ]]; then
-    exit 0
-fi
-
-#
-# Create the route to reach macvlan from the host
-#
-/usr/sbin/ip link add macvlan0 link $macVlanNic type macvlan mode bridge  > /dev/null > 2&1
-/usr/sbin/ip addr add $macVlanNetwork dev macvlan0 > /dev/null > 2&1
-/usr/sbin/ip link set macvlan0 up > /dev/null > 2&1
-
-#
 # Check if macvlan network does not exist, and attempt to create it as necessariy
 #
 
@@ -48,8 +31,13 @@ fi
 if [[ -z $macVlanGateway ]]; then
     exit 0
 fi
+
 if [[ -z $macVlanLocalNetwork ]]; then
     exit 0
 fi
 
-/usr/bin/docker network create --driver=macvlan --gateway=$macVlanGateway --subnet=$macVlanLocalNetwork -o parent=$macVlanNic macvlan
+if [[ -z $macVlanNic ]]; then
+    exit 0
+fi
+
+/usr/bin/docker network create --driver=macvlan --gateway=${macVlanGateway} --subnet=${macVlanLocalNetwork} -o parent=${macVlanNic} macvlan
