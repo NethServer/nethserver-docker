@@ -1,5 +1,5 @@
 
 #
-# mac macvlan network
+# macvl macvlan network
 #
-mac      macvlan+     optional
+macvl      macvlan+     optional

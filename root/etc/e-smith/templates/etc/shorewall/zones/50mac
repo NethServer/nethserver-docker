@@ -1,6 +1,6 @@
 
 #
-# mac macvlan
+# macvl macvlan
 #
 
-mac  ipv4
+macvl  ipv4
