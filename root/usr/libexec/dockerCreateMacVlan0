@@ -12,6 +12,11 @@ if [[ -z $macVlanNic ]]; then
 fi
 
 #
+# First delete macvlan0 
+#
+/usr/sbin/ip link delete macvlan0 &> /dev/null
+
+#
 # Create macvlan0
 #
 /usr/sbin/ip link add macvlan0 link $macVlanNic type macvlan mode bridge
