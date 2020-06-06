@@ -1,7 +1,9 @@
 {
 # enable the docker-ce stable repo
 
-push @repos, 'docker-ce-stable';
+if ($docker{enableRepository} eq 'enabled') {
+    push @repos, 'docker-ce-stable';
+}
 
     '';
 }
