@@ -1,0 +1,15 @@
+{
+#
+# Enable $firewall{Docker}
+#
+
+  my $docker = $DB->get_prop('firewall', 'Docker') || 'disabled';
+
+  if($docker eq 'enabled') {
+    return '';
+  }
+
+  $DB->set_prop('firewall', 'Docker', 'enabled');
+
+  '';
+}
