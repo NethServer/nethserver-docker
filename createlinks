@@ -50,3 +50,10 @@ event_actions('nethserver-docker-plugin-update', qw(
     initialize-default-databases   00
     nethserver-docker-upgrade-plugin 20
 ));
+
+#
+# restart docker to create at the end the macvlan0
+#
+event_actions('interface-update', qw(
+    nethserver-docker-interface-update-restart-docker   99
+));
