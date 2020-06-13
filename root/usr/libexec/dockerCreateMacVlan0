@@ -11,6 +11,17 @@ if [[ -z $macVlanNic ]]; then
     exit 0
 fi
 
+nicExist=$(/usr/sbin/e-smith/db networks get $macVlanNic)
+if [[ -z $nicExist ]];then
+    exit 0
+fi
+
+isBridge=$(/usr/sbin/e-smith/db networks gettype $macVlanNic)
+if [[ $isBridge != 'bridge' ]];then
+    echo "The nic is not a bridge, macvlan cannot be created"
+    exit 0
+fi
+
 #
 # First delete macvlan0 
 #
@@ -22,3 +33,4 @@ fi
 /usr/sbin/ip link add macvlan0 link $macVlanNic type macvlan mode bridge
 /usr/sbin/ip addr add $macVlanNetwork dev macvlan0
 /usr/sbin/ip link set macvlan0 up
+
