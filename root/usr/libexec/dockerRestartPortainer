@@ -4,6 +4,11 @@
 # When docker is restarted Portainer cannot use the local endpoint unix:///var/run/docker.sock
 #
 
+if ! systemctl is-active -q docker; then
+    echo "[WARNING] docker is down, exit"
+    exit 0
+fi
+
 HasPortainer=$(docker ps -f name=portainer -q -a)
 
 if [[ $? != 0 ]]; then
