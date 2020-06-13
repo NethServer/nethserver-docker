@@ -1,0 +1,55 @@
+#!/bin/bash
+
+macVlanNic=$(/usr/sbin/e-smith/db configuration getprop docker macVlanNic)
+macVlanGateway=$(/usr/sbin/e-smith/db configuration getprop docker macVlanGateway)
+macVlanLocalNetwork=$(/usr/sbin/e-smith/db configuration getprop docker macVlanLocalNetwork)
+
+# Check if macvlan network does not exist, and attempt to create it as necessariy
+#
+
+status=$(/sbin/e-smith/config getprop docker status)
+
+if [[ ${status} != enabled ]]; then
+    exit 0
+fi
+
+if ! systemctl is-active -q docker; then
+    echo "[WARNING] Attempt to start docker"
+    systemctl start docker
+fi
+
+
+HasNetwork=$(docker network ls -f name=macvlan -q)
+if [[ $? != 0 ]]; then
+    exit 1
+fi
+
+if [[ -n ${HasNetwork} ]]; then
+    exit 0
+fi
+
+if [[ -z $macVlanGateway ]]; then
+    exit 0
+fi
+
+if [[ -z $macVlanLocalNetwork ]]; then
+    exit 0
+fi
+
+if [[ -z $macVlanNic ]]; then
+    exit 0
+fi
+
+# We want a bridge to create macvlan on it, we verify before
+nicExist=$(/usr/sbin/e-smith/db networks get $macVlanNic)
+if [[ -z $nicExist ]];then
+    exit 0
+fi
+
+isBridge=$(/usr/sbin/e-smith/db networks gettype $macVlanNic)
+if [[ $isBridge != 'bridge' ]];then
+    echo "The nic is not a bridge, macvlan cannot be created"
+    exit 0
+fi
+
+/usr/bin/docker network create --driver=macvlan --gateway=${macVlanGateway} --subnet=${macVlanLocalNetwork} -o parent=${macVlanNic} macvlan

@@ -1,0 +1,43 @@
+#!/bin/bash
+
+macVlanNetwork=$(/usr/sbin/e-smith/db configuration getprop docker macVlanNetwork)
+macVlanNic=$(/usr/sbin/e-smith/db configuration getprop docker macVlanNic)
+
+if [[ -z $macVlanNetwork ]]; then
+    exit 0
+fi
+
+if [[ -z $macVlanNic ]]; then
+    exit 0
+fi
+
+nicExist=$(/usr/sbin/e-smith/db networks get $macVlanNic)
+if [[ -z $nicExist ]];then
+    exit 0
+fi
+
+isBridge=$(/usr/sbin/e-smith/db networks gettype $macVlanNic)
+if [[ $isBridge != 'bridge' ]];then
+    echo "The nic is not a bridge, macvlan cannot be created"
+    exit 0
+fi
+
+#
+# First delete macvlan0 
+#
+/usr/sbin/ip link delete macvlan0 &> /dev/null
+
+#
+# Create macvlan0
+#
+/usr/sbin/ip link add macvlan0 link $macVlanNic type macvlan mode bridge
+/usr/sbin/ip addr add $macVlanNetwork dev macvlan0
+/usr/sbin/ip link set macvlan0 up
+
+#
+# restart the docker container on macvlan. Needed after network.service restart or interface-update event
+#
+isMacvlanRunning=$(/usr/bin/docker ps -a -q -f network=macvlan)
+if [[ $isMacvlanRunning ]]; then
+    /usr/bin/docker restart $(/usr/bin/docker ps -a -q -f network=macvlan)
+fi

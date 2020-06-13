@@ -1,0 +1,7 @@
+#!/bin/bash
+
+#
+# Restart docker after the event interface-update
+#
+
+/usr/bin/systemctl restart docker
