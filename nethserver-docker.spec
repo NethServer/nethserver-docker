@@ -1,5 +1,5 @@
 Name:           nethserver-docker
-Version: 1.0.3
+Version: 1.0.4
 Release: 1%{?dist}
 Summary:        NethServer Docker configuration
 
@@ -37,6 +37,9 @@ mkdir -p ${RPM_BUILD_ROOT}/var/log/docker
 %dir %{_nsstatedir}/portainer
 
 %changelog
+* Sat Jun 13 2020 Stephane de Labrusse <stephdl@de-labrusse.fr> - 1.0.4-1
+- Docker must be up before to restart macvlan container
+
 * Sat Jun 13 2020 Stephane de Labrusse <stephdl@de-labrusse.fr> - 1.0.3-1
 - Merge pull request #12 from stephdl/macvlan
 - Network macvlan for containers
