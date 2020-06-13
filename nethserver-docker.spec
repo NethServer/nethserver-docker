@@ -1,5 +1,5 @@
 Name:           nethserver-docker
-Version: 1.0.1
+Version: 1.0.2
 Release: 1%{?dist}
 Summary:        NethServer Docker configuration
 
@@ -37,6 +37,12 @@ mkdir -p ${RPM_BUILD_ROOT}/var/log/docker
 %dir %{_nsstatedir}/portainer
 
 %changelog
+* Sat Jun 13 2020 Stephane de Labrusse <stephdl@de-labrusse.fr> - 1.0.2-1
+  - Merge pull request #13 from stephdl/docker0
+  - Merge pull request #14 from stephdl/disableUpdate
+  - Disable by default docker-ce-stable
+  - Enable default bridge docker0
+
 * Sat May 16 2020 Stephane de Labrusse <stephdl@de-labrusse.fr> 1.0.1-1 
   - Merge pull request #11 from stephdl/fixRuletemplate
   - Rule template must output a comment
