@@ -34,3 +34,10 @@ fi
 /usr/sbin/ip addr add $macVlanNetwork dev macvlan0
 /usr/sbin/ip link set macvlan0 up
 
+#
+# restart the docker container on macvlan. Needed after network.service restart or interface-update event
+#
+isMacvlanRunning=$(/usr/bin/docker ps -a -q -f network=macvlan)
+if [[ $isMacvlanRunning ]]; then
+    /usr/bin/docker restart $(/usr/bin/docker ps -a -q -f network=macvlan)
+fi
