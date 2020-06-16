@@ -34,9 +34,8 @@ fi
 /usr/sbin/ip addr add $macVlanNetwork dev macvlan0
 /usr/sbin/ip link set macvlan0 up
 
-dockerUP=$(systemctl is-active  docker)
-if [[ $dockerUP != 'active' ]]; then
-    echo "[WARNING] docker is down, exit"
+if ! /usr/bin/docker ps &>/dev/null; then
+    echo "[WARNING] docker is down, Exit"
     exit 0
 fi
 
