@@ -1,5 +1,5 @@
 Name:           nethserver-docker
-Version: 1.0.4
+Version: 1.0.5
 Release: 1%{?dist}
 Summary:        NethServer Docker configuration
 
@@ -37,6 +37,11 @@ mkdir -p ${RPM_BUILD_ROOT}/var/log/docker
 %dir %{_nsstatedir}/portainer
 
 %changelog
+* Tue Jun 16 2020 Stephane de Labrusse <stephdl@de-labrusse.fr> - 1.0.5-1
+- Merge pull request #15 from stephdl/portainerEndpointLost
+- Create portainer after docker restart
+- After docker restart, portainer is restarted
+
 * Sat Jun 13 2020 Stephane de Labrusse <stephdl@de-labrusse.fr> - 1.0.4-1
 - Docker must be up before to restart macvlan container
 
