@@ -67,10 +67,16 @@ credentials.
 Docker repository
 -----------------
 
-The official repository of docker could be enabled to test the latest version ::
+The official repository of docker is bundled but not enabled, the upgrade might break the running containers. It is advised to stop all containers before to upgrade ``docker-ce``. 
+
+To upgrade to the latest stable version of docker:
 
     yum update --enablerepo=docker-ce-stable
 
+to enable it permanently:
+
+    config setprop docker enableRepository enabled
+    signal-event nethserver-docker-update
 
 Open Firewall For testing purpose
 ---------------------------------
