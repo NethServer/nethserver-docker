@@ -3,6 +3,7 @@
 macVlanNic=$(/usr/sbin/e-smith/db configuration getprop docker macVlanNic)
 macVlanGateway=$(/usr/sbin/e-smith/db configuration getprop docker macVlanGateway)
 macVlanLocalNetwork=$(/usr/sbin/e-smith/db configuration getprop docker macVlanLocalNetwork)
+bridgeAeria=$(/sbin/e-smith/config getprop docker bridgeAeria)
 
 # Check if macvlan network does not exist, and attempt to create it as necessariy
 #
@@ -49,6 +50,11 @@ fi
 isBridge=$(/usr/sbin/e-smith/db networks gettype $macVlanNic)
 if [[ $isBridge != 'bridge' ]];then
     echo "The nic is not a bridge, macvlan cannot be created"
+    exit 0
+fi
+
+if [[ ${bridgeAeria} == ${macVlanNic} ]]; then
+    echo "[NOTICE] The macvlan and aeria network cannot share the same bridge"
     exit 0
 fi
 
