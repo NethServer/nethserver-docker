@@ -118,6 +118,8 @@ Aeria uses a docker plugin. To update the plugin ::
 
     signal-event nethserver-docker-plugin-update
 
+The aeria network is not standard on docker, the developer can be contacted at https://github.com/devplayer0/docker-net-dhcp
+
 
 Macvlan
 -------
