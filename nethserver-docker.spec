@@ -1,5 +1,5 @@
 Name:           nethserver-docker
-Version: 1.0.5
+Version: 1.0.6
 Release: 1%{?dist}
 Summary:        NethServer Docker configuration
 
@@ -37,6 +37,10 @@ mkdir -p ${RPM_BUILD_ROOT}/var/log/docker
 %dir %{_nsstatedir}/portainer
 
 %changelog
+* Mon Jun 22 2020 Stephane de Labrusse <stephdl@de-labrusse.fr> - 1.0.6-1
+  - Merge pull request #20 from stephdl/bridgeCannotBeShared
+  - The bridge cannot be shared among aeria and macvlan
+
 * Tue Jun 16 2020 Stephane de Labrusse <stephdl@de-labrusse.fr> - 1.0.5-1
 - Merge pull request #15 from stephdl/portainerEndpointLost
 - Create portainer after docker restart
