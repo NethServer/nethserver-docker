@@ -25,8 +25,14 @@
 #
 
 bridgeAeria=$(/sbin/e-smith/config getprop docker bridgeAeria)
+macVlanNic=$(/sbin/e-smith/config getprop docker macVlanNic)
 
 if [[ -z ${bridgeAeria} ]]; then
+    exit 0
+fi
+
+if [[ ${bridgeAeria} == ${macVlanNic} ]]; then
+    echo "[NOTICE] The macvlan and aeria network cannot share the same bridge"
     exit 0
 fi
 

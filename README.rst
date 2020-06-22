@@ -100,7 +100,7 @@ Aeria network
 -------------
 
 NethServer docker provides a docker network named Aeria that is bound to a bridge.
-For bridge creation the server manager could be used.
+For bridge creation the server manager could be used. The same bridge cannot be shared among ``aeria`` and ``macvlan``, it is a docker limitation.
 
 To enable the Aeria network the bridgeAeria db prop has to be set to the name of the bridge ::
 
@@ -131,7 +131,7 @@ The difference between macvlan and aeria is that macvlan is not a plugin, it is 
 
 NethServer docker provides a docker network named ``macvlan`` that must be bound to a bridge. Each container on the network ``macvlan`` must have a relevant IP in the range assigned to macvlan, all containers will communicate like any servers on your network.
 
-For the bridge creation the server manager could be used, if you have already installed the account provider Samba AD (nethserver-dc), you have already a bridge called ``br0``. 
+For the bridge creation the server manager could be used, if you have already installed the account provider Samba AD (nethserver-dc), you have already a bridge called ``br0``. The same bridge cannot be shared among ``aeria`` and ``macvlan``, it is a docker limitation.
 
 
 A bridge is mandatory to ``macvlan``, you must accomplish this step before to go further: ``ip a`` can valid that the bridge is up and workable
