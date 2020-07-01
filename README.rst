@@ -120,6 +120,16 @@ Aeria uses a docker plugin. To update the plugin ::
 
 The aeria network is not standard on docker, the developer can be contacted at https://github.com/devplayer0/docker-net-dhcp
 
+Debug:
+
+After a docker update the plugin net-dhcp might be disabled
+
+to check it : `docker plugin ls`
+to enable it : `docker plugin enable devplayer0/net-dhcp`
+
+
+
+
 
 Macvlan
 -------
