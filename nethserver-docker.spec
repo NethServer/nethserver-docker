@@ -1,5 +1,5 @@
 Name:           nethserver-docker
-Version: 1.0.7
+Version: 1.0.8
 Release: 1%{?dist}
 Summary:        NethServer Docker configuration
 
@@ -37,6 +37,10 @@ mkdir -p ${RPM_BUILD_ROOT}/var/log/docker
 %dir %{_nsstatedir}/portainer
 
 %changelog
+* Mon Oct 26 2020 Stephane de Labrusse <stephdl@de-labrusse.fr> - 1.0.8-1
+- Merge pull request #22 from stephdl/FixFreeDevice
+- Fix static path to /dev/sdb
+
 * Wed Jul 01 2020 Stephane de Labrusse <stephdl@de-labrusse.fr> - 1.0.7-1
 - Merge pull request #21 from stephdl/EnableRepoForSubscription
 - Enable docker repository for subscription
