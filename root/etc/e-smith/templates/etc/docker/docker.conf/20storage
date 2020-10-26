@@ -6,10 +6,10 @@
     $OUT = '';
     
     if($docker{'DirectLvmDevice'}) {
-        $OUT = <<'EOF';
+        $OUT = <<"EOF";
     "storage-driver": "devicemapper",
     "storage-opts": [
-        "dm.directlvm_device=/dev/sdb"
+        "dm.directlvm_device=$docker{'DirectLvmDevice'}"
     ],
 EOF
     }
