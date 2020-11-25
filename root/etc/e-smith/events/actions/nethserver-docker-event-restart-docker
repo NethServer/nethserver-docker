@@ -21,7 +21,6 @@
 #
 
 #
-# Restart docker after the event interface-update
-#
+# Restart docker after the event
 
 /usr/bin/systemctl restart docker
