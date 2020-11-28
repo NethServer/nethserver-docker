@@ -55,5 +55,12 @@ event_actions('nethserver-docker-plugin-update', qw(
 # restart docker to create at the end the macvlan0
 #
 event_actions('interface-update', qw(
-    nethserver-docker-interface-update-restart-docker   99
+    nethserver-docker-event-restart-docker   99
+));
+
+#
+# restart docker after shorewall (else route are not added in iptables)
+#
+event_actions('firewall-adjust', qw(
+    nethserver-docker-event-restart-docker   99
 ));
