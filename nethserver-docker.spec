@@ -1,5 +1,5 @@
 Name:           nethserver-docker
-Version: 1.0.8
+Version: 1.0.9
 Release: 1%{?dist}
 Summary:        NethServer Docker configuration
 
@@ -37,6 +37,11 @@ mkdir -p ${RPM_BUILD_ROOT}/var/log/docker
 %dir %{_nsstatedir}/portainer
 
 %changelog
+* Sat Nov 28 2020 Stephane de Labrusse <stephdl@de-labrusse.fr> - 1.0.9-1
+- Merge pull request #23 from stephdl:fixShorewall
+- Restart docker with the event firewall-adjust
+- Restart docker when systemd restart shorewall
+
 * Mon Oct 26 2020 Stephane de Labrusse <stephdl@de-labrusse.fr> - 1.0.8-1
 - Merge pull request #22 from stephdl/FixFreeDevice
 - Fix static path to /dev/sdb
