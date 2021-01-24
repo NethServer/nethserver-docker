@@ -28,6 +28,8 @@ use esmith::Build::CreateLinks  qw(:all);
 #
 event_templates('nethserver-docker-update', qw(
     /etc/docker/docker.conf
+    /etc/httpd/conf.d/default-virtualhost.inc
+    /etc/httpd/conf.d/zzz_portainer.conf
 ));
 event_actions('nethserver-docker-update', qw(
     initialize-default-databases   00
@@ -41,6 +43,7 @@ event_actions('nethserver-docker-update', qw(
 event_services('nethserver-docker-update', qw(
     docker restart
     httpd-admin reload
+    httpd reload
 ));
 
 #

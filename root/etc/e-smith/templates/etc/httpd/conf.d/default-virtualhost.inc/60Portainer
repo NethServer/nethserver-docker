@@ -1,0 +1,7 @@
+#
+#60portainer
+#
+{
+  $OUT .= " RewriteEngine On\n";
+  $OUT .= " RewriteRule ^/portainer(/.*|\$)    https://%{HTTP_HOST}/portainer/\$1 [L,R]\n";
+}
