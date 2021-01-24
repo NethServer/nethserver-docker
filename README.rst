@@ -19,6 +19,7 @@ More port rules can be opened to the system services with a esmith db command::
 
 * It exposes portainer dashboards through the
   ``httpd-admin`` Apache instance as ``https://<IP>:980/portainer/``
+  ``httpd`` Apache instance as ``https://<IP>/portainer/``
 
 The default Docker *bridged* network is enabled
 
@@ -57,9 +58,11 @@ Portainer is an interface to manage all containers running on this host or event
     config setprop portainer status enabled
     signal-event nethserver-docker-update
 
-Access the Portainer user interface at ::
+Access the Portainer user interface 443 or 980 TCP port::
 
     https://<IP>:980/portainer/
+    https://<IP>/portainer/
+
 
 The first time it is accessed, it asks to generate the administrative
 credentials.
