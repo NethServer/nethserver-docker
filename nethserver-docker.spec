@@ -9,6 +9,7 @@ Source0:        %{name}-%{version}.tar.gz
 BuildArch:      noarch
 BuildRequires:  nethserver-devtools
 Requires:       docker-ce
+Requires: nethserver-httpd-admin-service
 
 %description
 NethServer configuration for Docker CE
