@@ -1,5 +1,5 @@
 Name:           nethserver-docker
-Version: 1.0.9
+Version: 1.0.10
 Release: 1%{?dist}
 Summary:        NethServer Docker configuration
 
@@ -38,6 +38,10 @@ mkdir -p ${RPM_BUILD_ROOT}/var/log/docker
 %dir %{_nsstatedir}/portainer
 
 %changelog
+* Thu Jan 28 2021 Stephane de Labrusse <stephdl@de-labrusse.fr> - 1.0.10-1
+- Merge pull request #25 from stephdl/RequiresNethserver-httpd-admin-service
+- Requires nethserver-httpd-admin-service
+
 * Sat Nov 28 2020 Stephane de Labrusse <stephdl@de-labrusse.fr> - 1.0.9-1
 - Merge pull request #23 from stephdl:fixShorewall
 - Restart docker with the event firewall-adjust
