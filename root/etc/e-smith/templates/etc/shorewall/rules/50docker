@@ -23,8 +23,10 @@
 	    my ($port, $proto) = split(/\//, $k);
 
 	    foreach my $src (@{$bindings{$k}}) {
-                my $hostIp = $src->{'HostIp'} eq '0.0.0.0' ? '-' : $src->{'HostIp'};
-                $OUT .= "DNAT loc dock:" . $config->{'NetworkSettings'}->{'IPAddress'} . ":$port $proto " . $src->{'HostPort'} . " - $hostIp\n";
+                if (index($src->{'HostIp'},':') < 0) { # Ignoring IPv6 reported by docker (shorewall and Nethserver are IPv4 only!)
+                    my $hostIp = $src->{'HostIp'} eq '0.0.0.0' ? '-' : $src->{'HostIp'};
+                    $OUT .= "DNAT loc dock:" . $config->{'NetworkSettings'}->{'IPAddress'} . ":$port $proto " . $src->{'HostPort'} . " - $hostIp\n";
+                }
             }
         }
 	$OUT .= "\n";
