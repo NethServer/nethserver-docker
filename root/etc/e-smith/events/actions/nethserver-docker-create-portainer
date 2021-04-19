@@ -54,5 +54,5 @@ docker run --detach \
     --hostname portainer \
     --network aqua \
     --ip ${IpAddress} \
-    portainer/portainer \
+    portainer/portainer-ce \
     -H unix:///var/run/docker.sock
