@@ -1,5 +1,5 @@
 Name:           nethserver-docker
-Version: 1.0.10
+Version: 1.0.11
 Release: 1%{?dist}
 Summary:        NethServer Docker configuration
 
@@ -38,6 +38,9 @@ mkdir -p ${RPM_BUILD_ROOT}/var/log/docker
 %dir %{_nsstatedir}/portainer
 
 %changelog
+* Mon Apr 19 2021 Stephane de Labrusse <stephdl@de-labrusse.fr> - 1.0.11-1
+- DOCKER: Shorewall rules consistencly broken when IPv6 is enabled for docker networks - Bug NethServer/dev#6487
+
 * Thu Jan 28 2021 Stephane de Labrusse <stephdl@de-labrusse.fr> - 1.0.10-1
 - Merge pull request #25 from stephdl/RequiresNethserver-httpd-admin-service
 - Requires nethserver-httpd-admin-service
