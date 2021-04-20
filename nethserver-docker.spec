@@ -1,5 +1,5 @@
 Name:           nethserver-docker
-Version: 1.0.11
+Version: 1.0.12
 Release: 1%{?dist}
 Summary:        NethServer Docker configuration
 
@@ -38,6 +38,9 @@ mkdir -p ${RPM_BUILD_ROOT}/var/log/docker
 %dir %{_nsstatedir}/portainer
 
 %changelog
+* Tue Apr 20 2021 Stephane de Labrusse <stephdl@de-labrusse.fr> - 1.0.12-1
+- Portainer: Upgrade to portainer-ce - NethServer/dev#6492
+
 * Mon Apr 19 2021 Stephane de Labrusse <stephdl@de-labrusse.fr> - 1.0.11-1
 - DOCKER: Shorewall rules consistencly broken when IPv6 is enabled for docker networks - Bug NethServer/dev#6487
 
