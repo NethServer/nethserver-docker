@@ -28,11 +28,11 @@ use esmith::Build::CreateLinks  qw(:all);
 #
 event_templates('nethserver-docker-update', qw(
     /etc/docker/docker.conf
+    /etc/nethserver/eorepo.conf
 ));
 event_actions('nethserver-docker-update', qw(
     initialize-default-databases   00
     nethserver-docker-create-logs  10
-    nethserver-docker-enable-repository 10
     nethserver-docker-create-network 20
     nethserver-docker-create-portainer 95
     nethserver-docker-create-aeria 20
