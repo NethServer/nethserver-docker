@@ -1,5 +1,5 @@
 Name:           nethserver-docker
-Version: 1.0.12
+Version: 1.0.13
 Release: 1%{?dist}
 Summary:        NethServer Docker configuration
 
@@ -38,6 +38,9 @@ mkdir -p ${RPM_BUILD_ROOT}/var/log/docker
 %dir %{_nsstatedir}/portainer
 
 %changelog
+* Thu Aug 12 2021 Stephane de Labrusse <stephdl@de-labrusse.fr> - 1.0.13-1
+- nethserver-docker: do not trigger software-repo-save - NethServer/dev#6561
+
 * Tue Apr 20 2021 Stephane de Labrusse <stephdl@de-labrusse.fr> - 1.0.12-1
 - Portainer: Upgrade to portainer-ce - NethServer/dev#6492
 
